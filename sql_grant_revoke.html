@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SQL GRANT and REVOKE Statements</title>
+  <style>
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #ffffff;
+      padding: 20px;
+      color: #2a2a2a;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .code-box {
+      background-color: #e2e6ee;
+      border-left: 4px solid #0071e3;
+      padding: 15px;
+      font-family: Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    code {
+      background-color: #eef3fa;
+      color: #0071e3;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 90%;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <h1>SQL GRANT and REVOKE Statements</h1>
+    <p>In SQL, managing user permissions is essential for maintaining database security. The <code>GRANT</code> and <code>REVOKE</code> statements are used to assign or remove privileges from users or roles.</p>
+  </div>
+
+  <div class="section">
+    <h2>GRANT Statement</h2>
+    <p>The <code>GRANT</code> statement provides specific privileges to a user or role. These privileges define what operations they can perform on database objects.</p>
+
+    <h3>Syntax</h3>
+    <div class="code-box">
+GRANT privilege_name(s)
+ON object_name
+TO {user_name | PUBLIC | role_name}
+[WITH GRANT OPTION];
+    </div>
+
+    <ul>
+      <li><code>privilege_name(s)</code>: Privileges to grant (e.g., SELECT, INSERT).</li>
+      <li><code>object_name</code>: The target object of the privilege (e.g., table).</li>
+      <li><code>user_name</code>: The user receiving the privileges.</li>
+      <li><code>role_name</code>: A role to receive the privileges.</li>
+      <li><code>PUBLIC</code>: Grants privileges to all users.</li>
+      <li><code>WITH GRANT OPTION</code>: Allows the recipient to grant these privileges to others.</li>
+    </ul>
+
+    <h3>Example</h3>
+    <p>Granting SELECT, INSERT, and DELETE privileges on the <code>mydb</code> database to <code>user1</code>:</p>
+    <div class="code-box">
+GRANT SELECT, INSERT, DELETE ON mydb TO 'user1'@'localhost';
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>REVOKE Statement</h2>
+    <p>The <code>REVOKE</code> statement removes specific privileges from a user or role, restricting what they can do in the database.</p>
+
+    <h3>Syntax</h3>
+    <div class="code-box">
+REVOKE privilege_name(s)
+ON object_name
+FROM {user_name | PUBLIC | role_name};
+    </div>
+
+    <ul>
+      <li><code>privilege_name(s)</code>: The privileges to remove.</li>
+      <li><code>object_name</code>: The object from which privileges are revoked.</li>
+      <li><code>user_name</code>: The user losing the privileges.</li>
+      <li><code>role_name</code>: The role losing the privileges.</li>
+      <li><code>PUBLIC</code>: Revokes from all users.</li>
+    </ul>
+
+    <h3>Example</h3>
+    <p>Revoking the INSERT privilege on <code>mydb</code> from <code>user1</code>:</p>
+    <div class="code-box">
+REVOKE INSERT ON mydb FROM 'user1'@'localhost';
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Understanding Privileges</h2>
+    <p>Privileges determine what actions users can perform on database objects. Common ones include:</p>
+    <ul>
+      <li><code>SELECT</code>: Read data from a table.</li>
+      <li><code>INSERT</code>: Add new rows to a table.</li>
+      <li><code>UPDATE</code>: Modify existing data.</li>
+      <li><code>DELETE</code>: Remove data from a table.</li>
+      <li><code>EXECUTE</code>: Run stored procedures/functions.</li>
+    </ul>
+    <p>Proper privilege management helps maintain database security and ensures users have only the access they need.</p>
+  </div>
+
+</body>
+</html>

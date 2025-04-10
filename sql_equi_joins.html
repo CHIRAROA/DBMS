@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SQL Equi Join</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f0f4f8;
+      padding: 30px;
+      color: #2a2a2a;
+    }
+    h1, h2, h3 {
+      color: #1a1a1a;
+    }
+    .section {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.02);
+    }
+    .code-box {
+      background-color: #e2e6ee;
+      border-left: 4px solid #0071e3;
+      padding: 15px;
+      font-family: 'Courier New', Courier, monospace;
+      white-space: pre;
+      overflow-x: auto;
+      border-radius: 8px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    code {
+      background-color: #e0eefe;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    table th {
+      background-color: #f4f4f4;
+      font-weight: 600;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <h1>SQL Equi Join</h1>
+    <p>An <strong>Equi Join</strong> in SQL is a type of join that combines rows from two or more tables based on a common column or set of columns, using the equality operator <code>=</code> to compare column values. It is one of the most frequently used types of joins because it matches columns from different tables that have equal values, allowing the combination of related data.</p>
+  </div>
+
+  <div class="section">
+    <h2>Why are Equi Joins Important?</h2>
+    <ul>
+      <li><strong>Data Integrity:</strong> Ensures only related data from multiple tables is combined.</li>
+      <li><strong>Query Performance:</strong> Optimizes data retrieval by leveraging indexes on join columns.</li>
+      <li><strong>Data Normalization:</strong> Supports database normalization by joining tables that have been split into logically related entities.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Comparison with Other Joins</h2>
+    <ul>
+      <li><strong>Inner Join:</strong> Similar to Equi Join but can use any comparison operator.</li>
+      <li><strong>Outer Join:</strong> Returns all rows from one table and the matched rows from the other.</li>
+      <li><strong>Cross Join:</strong> Combines all rows from both tables, resulting in a Cartesian product.</li>
+      <li><strong>Natural Join:</strong> Automatically joins tables based on columns with the same names and compatible data types.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Syntax</h2>
+    <div class="code-box">
+SELECT column_list
+FROM table1
+JOIN table2
+ON table1.column_name = table2.column_name;
+    </div>
+    <p>Alternatively, using the WHERE clause:</p>
+    <div class="code-box">
+SELECT column_list
+FROM table1, table2
+WHERE table1.column_name = table2.column_name;
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Example</h2>
+    <p>Consider the following tables:</p>
+
+    <h3>Agents Table</h3>
+    <table>
+      <tr>
+        <th>AGENT_CODE</th>
+        <th>AGENT_NAME</th>
+        <th>WORKING_AREA</th>
+        <th>COMMISSION</th>
+        <th>PHONE_NO</th>
+        <th>COUNTRY</th>
+      </tr>
+      <tr>
+        <td>A007</td>
+        <td>Ramasundar</td>
+        <td>Bangalore</td>
+        <td>0.15</td>
+        <td>077-25814763</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>A003</td>
+        <td>Alex</td>
+        <td>London</td>
+        <td>0.13</td>
+        <td>075-12458969</td>
+        <td></td>
+      </tr>
+    </table>
+
+    <h3>Orders Table</h3>
+    <table>
+      <tr>
+        <th>ORD_NUM</th>
+        <th>ORD_AMOUNT</th>
+        <th>ADVANCE_AMOUNT</th>
+        <th>ORD_DATE</th>
+        <th>CUST_CODE</th>
+        <th>AGENT_CODE</th>
+        <th>ORD_DESCRIPTION</th>
+      </tr>
+      <tr>
+        <td>200100</td>
+        <td>1000.00</td>
+        <td>600.00</td>
+        <td>08-JAN-2025</td>
+        <td>C00015</td>
+        <td>A003</td>
+        <td>SOD</td>
+      </tr>
+      <tr>
+        <td>200101</td>
+        <td>3000.00</td>
+        <td>500.00</td>
+        <td>08-JAN-2025</td>
+        <td>C00011</td>
+        <td>A003</td>
+        <td>SOD</td>
+      </tr>
+    </table>
+
+    <p>To retrieve a list of orders along with the corresponding agent names, you can use the following SQL query:</p>
+    <div class="code-box">
+SELECT orders.ORD_NUM, orders.ORD_AMOUNT, agents.AGENT_NAME
+FROM orders
+JOIN agents
+ON orders.AGENT_CODE = agents.AGENT_CODE;
+    </div>
+
+    <p><strong>Explanation:</strong> This query joins the <code>orders</code> table with the <code>agents</code> table on the common column <code>AGENT_CODE</code> using an Equi Join. It selects the order number, order amount, and the agent's name for each order.</p>
+  </div>
+
+</body>
+</html>

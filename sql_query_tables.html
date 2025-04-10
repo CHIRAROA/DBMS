@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SQL SELECT Statement</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #ffffff;
+      padding: 20px;
+      color: #2a2a2a;
+      line-height: 1.6;
+    }
+
+    h1, h2 {
+      color: #2c3e50;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .code-box {
+      background-color: #f7f9fc;
+      border-left: 4px solid #0071e3;
+      padding: 15px;
+      font-family: Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    code {
+      background-color: #eef3fa;
+      color: #0071e3;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 90%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <h1>SQL SELECT Statement</h1>
+    <p>The <strong>SELECT</strong> statement is used to select data from a database.</p>
+  </div>
+
+  <div class="section">
+    <h2>Syntax</h2>
+    <div class="code-box">
+SELECT column1, column2, ...
+FROM table_name;
+    </div>
+    <p>Here, <code>column1</code>, <code>column2</code>, ... are the field names of the table you want to select data from. The <code>table_name</code> represents the name of the table you want to select data from.</p>
+  </div>
+
+  <div class="section">
+    <h2>Select All Columns</h2>
+    <p>If you want to return all columns, without specifying every column name, you can use the <code>SELECT *</code> syntax:</p>
+    <div class="code-box">
+SELECT * FROM table_name;
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Example</h2>
+    <p>Return data from the <code>Customers</code> table:</p>
+    <div class="code-box">
+SELECT CustomerName, City FROM Customers;
+    </div>
+    <p>This will select the <code>CustomerName</code> and <code>City</code> columns from the <code>Customers</code> table.</p>
+  </div>
+
+  <div class="section">
+    <h2>Example: Select All Columns</h2>
+    <p>Return all the columns from the <code>Customers</code> table:</p>
+    <div class="code-box">
+SELECT * FROM Customers;
+    </div>
+    <p>This will select all columns from the <code>Customers</code> table.</p>
+  </div>
+
+</body>
+</html>

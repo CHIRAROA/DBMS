@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PL/SQL Variables and Constants</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+
+    h1, h2, h3 {
+      color: #0071e3;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-top: 30px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    p, li {
+      font-size: 16px;
+    }
+
+    .syntax, .example {
+      border: 1px solid #0071e3;
+      background-color: #ffffff;
+      padding: 15px;
+      margin: 20px 0;
+      font-family: Consolas, monospace;
+      white-space: pre-wrap;
+      border-radius: 12px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #e9f3fc;
+      color: #0071e3;
+    }
+
+    code {
+      background-color: #e9f3fc;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>PL/SQL Variables and Constants</h1>
+
+  <p>In PL/SQL, variables and constants are used to store data temporarily for use during program execution. A variable can be updated during execution, while a constant cannot be changed once assigned.</p>
+
+  <h2>Declaring Variables</h2>
+
+  <p>PL/SQL variables must be declared in the <code>DECLARE</code> section of a PL/SQL block. You can optionally initialize variables at the time of declaration.</p>
+
+  <h3>Syntax</h3>
+  <div class="syntax">
+variable_name datatype [NOT NULL] [:= initial_value];
+  </div>
+
+  <h3>Example</h3>
+  <div class="example">
+DECLARE<br>
+  salary NUMBER(7,2);<br>
+  name VARCHAR2(50) := 'John';<br>
+BEGIN<br>
+  NULL;<br>
+END;
+  </div>
+
+  <h2>Variable Scope</h2>
+  <p>The scope of a variable is the region of the program where the variable can be accessed. PL/SQL supports:</p>
+
+  <ul>
+    <li><strong>Local Scope</strong> – Variables declared within a block, accessible only inside that block.</li>
+    <li><strong>Global Scope</strong> – Variables declared in a package, accessible throughout the application.</li>
+  </ul>
+
+  <h2>Declaring Constants</h2>
+  <p>Constants are similar to variables but must be assigned a value at the time of declaration and cannot be modified later.</p>
+
+  <h3>Syntax</h3>
+  <div class="syntax">
+constant_name CONSTANT datatype := value;
+  </div>
+
+  <h3>Example</h3>
+  <div class="example">
+DECLARE<br>
+  pi CONSTANT NUMBER := 3.14159;<br>
+  app_name CONSTANT VARCHAR2(20) := 'HR_APP';<br>
+BEGIN<br>
+  NULL;<br>
+END;
+  </div>
+
+  <h2>Using %TYPE Attribute</h2>
+  <p>The <code>%TYPE</code> attribute allows you to declare a variable with the same data type as a column or another variable.</p>
+
+  <h3>Syntax</h3>
+  <div class="syntax">
+variable_name table_name.column_name%TYPE;
+  </div>
+
+  <h3>Example</h3>
+  <div class="example">
+DECLARE<br>
+  emp_salary employees.salary%TYPE;<br>
+BEGIN<br>
+  NULL;<br>
+END;
+  </div>
+
+  <h2>Using %ROWTYPE Attribute</h2>
+  <p>The <code>%ROWTYPE</code> attribute allows declaration of a record with the same structure as a row in a table or a cursor.</p>
+
+  <h3>Syntax</h3>
+  <div class="syntax">
+record_name table_name%ROWTYPE;
+  </div>
+
+  <h3>Example</h3>
+  <div class="example">
+DECLARE<br>
+  emp_rec employees%ROWTYPE;<br>
+BEGIN<br>
+  NULL;<br>
+END;
+  </div>
+
+  <h2>Summary</h2>
+  <p>PL/SQL supports robust variable and constant handling with options for type safety using <code>%TYPE</code> and <code>%ROWTYPE</code>. These constructs help in writing maintainable and error-free code, especially when working with database objects.</p>
+
+</body>
+</html>

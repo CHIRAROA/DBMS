@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SQL String Functions</title>
+  <style>
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #ffffff;
+      padding: 20px;
+      color: #2a2a2a;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .code-box {
+      background-color: #e2e6ee;
+      border-left: 4px solid #0071e3;
+      padding: 12px 15px;
+      font-family: Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      margin: 10px 0;
+      border-radius: 4px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    code {
+      background-color: #eef3fa;
+      color: #0071e3;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 90%;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 15px;
+      background-color: #fdfefe;
+    }
+
+    table, th, td {
+      border: 1px solid #d6dbe0;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <h1>SQL String Functions</h1>
+    <p>SQL offers a variety of string functions to manipulate text data efficiently. These functions allow developers to extract, modify, combine, and analyze strings in powerful ways.</p>
+  </div>
+
+  <div class="section">
+    <h2>Common SQL String Functions</h2>
+    <table>
+      <tr>
+        <th>Function</th>
+        <th>Description</th>
+        <th>Example</th>
+      </tr>
+      <tr>
+        <td><code>ASCII()</code></td>
+        <td>Returns the ASCII value of the first character in a string.</td>
+        <td><div class="code-box">SELECT ASCII('A') AS AsciiValue;</div></td>
+      </tr>
+      <tr>
+        <td><code>CHAR()</code></td>
+        <td>Returns the character corresponding to a given ASCII code.</td>
+        <td><div class="code-box">SELECT CHAR(65) AS Character;</div></td>
+      </tr>
+      <tr>
+        <td><code>CHARINDEX()</code></td>
+        <td>Finds the position of a substring within a string.</td>
+        <td><div class="code-box">SELECT CHARINDEX('world', 'Hello world') AS Position;</div></td>
+      </tr>
+      <tr>
+        <td><code>CONCAT()</code></td>
+        <td>Joins two or more strings together.</td>
+        <td><div class="code-box">SELECT CONCAT('Hello', ' ', 'World') AS Greeting;</div></td>
+      </tr>
+      <tr>
+        <td><code>LEFT()</code></td>
+        <td>Returns the first N characters from the left of a string.</td>
+        <td><div class="code-box">SELECT LEFT('Hello World', 5) AS LeftPart;</div></td>
+      </tr>
+      <tr>
+        <td><code>RIGHT()</code></td>
+        <td>Returns the last N characters from the right of a string.</td>
+        <td><div class="code-box">SELECT RIGHT('Hello World', 5) AS RightPart;</div></td>
+      </tr>
+      <tr>
+        <td><code>LEN()</code></td>
+        <td>Returns the number of characters in a string.</td>
+        <td><div class="code-box">SELECT LEN('Hello World') AS Length;</div></td>
+      </tr>
+      <tr>
+        <td><code>LOWER()</code></td>
+        <td>Converts all letters in a string to lowercase.</td>
+        <td><div class="code-box">SELECT LOWER('HELLO WORLD') AS Lowercase;</div></td>
+      </tr>
+      <tr>
+        <td><code>UPPER()</code></td>
+        <td>Converts all letters in a string to uppercase.</td>
+        <td><div class="code-box">SELECT UPPER('hello world') AS Uppercase;</div></td>
+      </tr>
+      <tr>
+        <td><code>LTRIM()</code></td>
+        <td>Removes leading spaces from a string.</td>
+        <td><div class="code-box">SELECT LTRIM('   Hello World') AS Trimmed;</div></td>
+      </tr>
+      <tr>
+        <td><code>RTRIM()</code></td>
+        <td>Removes trailing spaces from a string.</td>
+        <td><div class="code-box">SELECT RTRIM('Hello World   ') AS Trimmed;</div></td>
+      </tr>
+      <tr>
+        <td><code>REPLACE()</code></td>
+        <td>Replaces all occurrences of a substring with another substring.</td>
+        <td><div class="code-box">SELECT REPLACE('Hello World', 'World', 'SQL') AS Replaced;</div></td>
+      </tr>
+      <tr>
+        <td><code>REVERSE()</code></td>
+        <td>Reverses the characters in a string.</td>
+        <td><div class="code-box">SELECT REVERSE('Hello') AS Reversed;</div></td>
+      </tr>
+      <tr>
+        <td><code>STUFF()</code></td>
+        <td>Deletes part of a string and inserts another string at the specified position.</td>
+        <td><div class="code-box">SELECT STUFF('Hello World', 6, 5, 'SQL') AS Stuffed;</div></td>
+      </tr>
+      <tr>
+        <td><code>SUBSTRING()</code></td>
+        <td>Extracts part of a string starting at a given position and length.</td>
+        <td><div class="code-box">SELECT SUBSTRING('Hello World', 7, 5) AS Extracted;</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Conclusion</h2>
+    <p>String functions are essential for text manipulation in SQL. They allow precise control over how string data is handled, cleaned, and presented in your queries.</p>
+  </div>
+
+</body>
+</html>

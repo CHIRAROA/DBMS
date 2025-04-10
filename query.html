@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SQL Top 3 Students Query</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 40px;
+      color: #222;
+      line-height: 1.8;
+    }
+    h1 {
+      color: #0071e3;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #333;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 6px;
+      margin-top: 40px;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+    p, ul {
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    pre {
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      font-family: Consolas, monospace;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .section {
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.03);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <h1>SQL Top 3 Students Query</h1>
+
+    <h2>Description</h2>
+    <p>
+      In this query, we store the marks of students and calculate the top 3 students.<br>
+      <strong>Criteria:</strong> Student should have an aggregate of more than 60%, must not fail any subject (i.e. no marks &lt; 30), and must not be absent in any subject.
+    </p>
+
+    <h2>Example</h2>
+    <ul>
+      <li>Exactly 4 students failing overall</li>
+      <li>2 students marked absent in one subject each</li>
+      <li>One of the absentees having the highest aggregate</li>
+      <li>Aggregate and percentage columns included</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Creation of the Table</h2>
+    <img src="SHOW_CREATE_TABLE.png" alt="Create table SQL output">
+  </div>
+
+  <div class="section">
+    <h2>Full Data of the Table</h2>
+    <img src="FULL_DATA.png" alt="Full data of the table">
+  </div>
+
+  <div class="section">
+    <h2>Students having aggregate more than 60%</h2>
+    <img src="AGGR_MORE_60.png" alt="Students having aggregate more than 60%">
+  </div>
+
+  <div class="section">
+    <h2>1st Position</h2>
+    <img src="1ST POSITION.png" alt="1st">
+  </div>
+
+  <div class="section">
+    <h2>2nd Position</h2>
+    <img src="2ND POSITION.png" alt="2nd">
+  </div>
+
+  <div class="section">
+    <h2>3rd Position</h2>
+    <img src="3RD POSITION.png" alt="3rd">
+  </div>
+
+</body>
+</html>

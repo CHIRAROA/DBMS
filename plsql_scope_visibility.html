@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PL/SQL Scope and Visibility</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1, h2, h3 {
+      color: #0071e3;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-top: 30px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    p, li {
+      font-size: 16px;
+      color: #333;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .syntax, .example {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-left: 5px solid #0071e3;
+      padding: 12px 16px;
+      margin: 20px 0;
+      font-family: Consolas, monospace;
+      white-space: pre-wrap;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.05);
+      border-radius: 8px;
+    }
+
+    code {
+      background-color: #e8f0fe;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>PL/SQL Scope and Visibility</h1>
+
+  <p>In PL/SQL, a variable's <strong>scope</strong> determines where it's accessible (the block and its nested blocks), and <strong>visibility</strong> dictates how it's referenced (unqualified or qualified).</p>
+
+  <h2>Scope</h2>
+
+  <ul>
+    <li><strong>Local:</strong> Variables declared within a PL/SQL block are local to that block and its nested blocks.</li>
+    <li><strong>Global:</strong> Variables declared in an outer block are accessible to all nested blocks within that outer block.</li>
+    <li><strong>Redeclaration:</strong> If a variable is redeclared in a nested block, the local version takes precedence. The outer version can be accessed using a qualified name (e.g., <code>outer_block.variable_name</code>).</li>
+    <li><strong>No Access to Parallel Blocks:</strong> A block cannot access variables declared in other blocks at the same level (siblings).</li>
+  </ul>
+
+  <h2>Visibility</h2>
+
+  <ul>
+    <li><strong>Unqualified:</strong> You can reference a variable using its name directly within the block where it's declared and all its nested blocks.</li>
+    <li><strong>Qualified:</strong> To reference a variable in a nested block that is declared in an outer block, use the block name followed by a period and the variable name (e.g., <code>outer_block.variable_name</code>).</li>
+  </ul>
+
+  <h2>Example</h2>
+
+  <div class="example">
+DECLARE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;outer_var NUMBER := 10;  -- Outer block variable<br>
+BEGIN<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Outer var: ' || outer_var);<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;-- Nested block<br>
+&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DECLARE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inner_var NUMBER := 5; -- Local variable<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outer_var NUMBER := 20; -- Redeclaration<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Inner var: ' || inner_var);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Outer var (local): ' || outer_var);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Outer var (global): ' || outer_block.outer_var); -- Qualified reference<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;END;<br>
+END;
+  </div>
+
+  <h2>Explanation</h2>
+
+  <ul>
+    <li><code>outer_var</code> is declared in the outer block and is accessible throughout the outer block and its nested block.</li>
+    <li><code>inner_var</code> is declared in the nested block and is only accessible within that nested block.</li>
+    <li>When <code>outer_var</code> is redeclared in the nested block, the local version takes precedence. The outer version can still be referenced using <code>outer_block.outer_var</code>.</li>
+  </ul>
+
+</body>
+</html>

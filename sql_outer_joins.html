@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SQL FULL OUTER JOIN</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f0f4f8;
+      padding: 20px;
+      color: #2a2a2a;
+    }
+    h1, h2, h3 {
+      color: #1a1a1a;
+    }
+    .section {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.03);
+    }
+    .code-box {
+      background-color: #e2e6ee;
+      border: 1px solid #0071e3;
+      border-left: 5px solid #0071e3;
+      border-radius: 8px;
+      padding: 15px;
+      font-family: 'Courier New', Courier, monospace;
+      white-space: pre;
+      overflow-x: auto;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    code {
+      background-color: #e1ecf9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #eaf3fc;
+      color: #1a1a1a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <h1>SQL FULL OUTER JOIN</h1>
+    <p>The SQL <code>FULL OUTER JOIN</code> keyword returns all records when there is a match in either the left (<code>table1</code>) or right (<code>table2</code>) table. It combines the results of both <code>LEFT JOIN</code> and <code>RIGHT JOIN</code>. If a row exists in one table without a matching row in the other, it will still appear in the result set with <code>NULL</code> values for the missing data.</p>
+  </div>
+
+  <div class="section">
+    <h2>Syntax</h2>
+    <div class="code-box">
+SELECT column_name(s)
+FROM table1
+FULL OUTER JOIN table2
+ON table1.column_name = table2.column_name
+WHERE condition;
+    </div>
+    <p><strong>Note:</strong> <code>FULL OUTER JOIN</code> returns all records from both tables, regardless of whether there's a match. Be careful using it with large tables, as it may return very large result sets.</p>
+  </div>
+
+  <div class="section">
+    <h2>Example</h2>
+    <p>Consider the following tables: <code>Customers</code> and <code>Orders</code>.</p>
+
+    <h3>Customers Table</h3>
+    <table>
+      <tr>
+        <th>CustomerID</th>
+        <th>CustomerName</th>
+        <th>ContactName</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>PostalCode</th>
+        <th>Country</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Alfreds Futterkiste</td>
+        <td>Maria Anders</td>
+        <td>Obere Str. 57</td>
+        <td>Berlin</td>
+        <td>12209</td>
+        <td>Germany</td>
+      </tr>
+      <!-- Additional rows -->
+    </table>
+
+    <h3>Orders Table</h3>
+    <table>
+      <tr>
+        <th>OrderID</th>
+        <th>CustomerID</th>
+        <th>EmployeeID</th>
+        <th>OrderDate</th>
+        <th>ShipperID</th>
+      </tr>
+      <tr>
+        <td>10308</td>
+        <td>2</td>
+        <td>7</td>
+        <td>1996-09-18</td>
+        <td>3</td>
+      </tr>
+      <!-- Additional rows -->
+    </table>
+
+    <p>The following SQL statement selects all customers and all orders:</p>
+    <div class="code-box">
+SELECT Customers.CustomerName, Orders.OrderID
+FROM Customers
+FULL OUTER JOIN Orders ON Customers.CustomerID = Orders.CustomerID
+ORDER BY Customers.CustomerName;
+    </div>
+
+    <p><strong>Explanation:</strong> This query retrieves all records from both the <code>Customers</code> and <code>Orders</code> tables. If a customer has no corresponding order, <code>OrderID</code> will be <code>NULL</code>, and if an order has no customer match, <code>CustomerName</code> will be <code>NULL</code>.</p>
+  </div>
+
+  <div class="section">
+    <h2>Note</h2>
+    <p>Not all database systems support the <code>FULL OUTER JOIN</code> keyword. If it's not supported, you can simulate its behavior by combining a <code>LEFT JOIN</code> and a <code>RIGHT JOIN</code> using <code>UNION</code>.</p>
+  </div>
+
+</body>
+</html>

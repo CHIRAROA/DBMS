@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PL/SQL Operators Precedence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1, h2, h3 {
+      color: #0071e3;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-top: 30px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    p, li {
+      font-size: 16px;
+      color: #333;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .syntax, .example {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-left: 5px solid #0071e3;
+      padding: 12px 16px;
+      margin: 20px 0;
+      font-family: Consolas, monospace;
+      white-space: pre-wrap;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.05);
+      border-radius: 8px;
+    }
+
+    code {
+      background-color: #e8f0fe;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      font-size: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #eaf3fb;
+      color: #0071e3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>PL/SQL Operators Precedence</h1>
+
+  <p>In PL/SQL, operator precedence determines the order in which operators are evaluated in an expression. Operators with higher precedence are evaluated before operators with lower precedence. When two operators have the same precedence, their associativity (left-to-right or right-to-left) determines the order of evaluation.</p>
+
+  <h2>Operator Precedence Table</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Precedence</th>
+        <th>Operator(s)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1 (Highest)</td>
+        <td><code>**</code></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><code>+ (Unary)</code>, <code>- (Unary)</code></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><code>*</code>, <code>/</code></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><code>+</code>, <code>-</code></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><code>||</code> (Concatenation)</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><code>RELATIONAL OPERATORS</code> (<code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>&lt;&gt;</code>, <code>!=</code>, <code>^=</code>, <code>IS NULL</code>, <code>LIKE</code>, <code>IN</code>, <code>BETWEEN</code>)</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><code>NOT</code></td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td><code>AND</code></td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td><code>OR</code></td>
+      </tr>
+      <tr>
+        <td>10 (Lowest)</td>
+        <td><code>:=</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Example</h2>
+
+  <div class="example">
+DECLARE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a NUMBER := 10;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b NUMBER := 5;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;c NUMBER;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;result BOOLEAN;<br>
+BEGIN<br>
+&nbsp;&nbsp;&nbsp;&nbsp;c := a + b * 2;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Value of c: ' || c);<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;result := (a > b) AND (c &lt; 25);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Logical Result: ' || result);<br>
+END;
+  </div>
+
+  <h2>Explanation</h2>
+
+  <ul>
+    <li>In the expression <code>c := a + b * 2</code>, multiplication has higher precedence than addition, so <code>b * 2</code> is evaluated first, then added to <code>a</code>.</li>
+    <li>The logical expression <code>(a &gt; b) AND (c &lt; 25)</code> uses relational operators and a logical <code>AND</code>. Relational operators are evaluated first, followed by <code>AND</code>.</li>
+  </ul>
+
+  <h2>Notes</h2>
+
+  <ul>
+    <li>Use parentheses to explicitly define the order of evaluation when needed.</li>
+    <li>Misunderstanding operator precedence can lead to logic errors in your code.</li>
+  </ul>
+
+</body>
+</html>

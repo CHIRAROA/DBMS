@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PL/SQL Cursors</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+
+    h1, h2, h3 {
+      color: #0071e3;
+    }
+
+    h1 {
+      font-size: 28px;
+      border-bottom: 2px solid #0071e3;
+      padding-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-top: 30px;
+      border-left: 4px solid #0071e3;
+      padding-left: 10px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    p, li {
+      font-size: 16px;
+      color: #333;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .syntax, .example {
+      border: 1px solid #ccc;
+      background-color: #ffffff;
+      padding: 12px 16px;
+      margin: 20px 0;
+      font-family: Consolas, monospace;
+      white-space: pre-wrap;
+      border-left: 4px solid #0071e3;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    code {
+      background-color: #e8f1fa;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>PL/SQL Cursors</h1>
+
+  <p>A cursor is a pointer to a context area in memory that stores the information of a SQL query during its processing. PL/SQL implicitly declares a cursor for all SQL data manipulation statements, but for more control, explicit cursors can also be used.</p>
+
+  <h2>Types of Cursors</h2>
+  <ul>
+    <li><strong>Implicit Cursors</strong> - Automatically created by PL/SQL for DML statements like INSERT, UPDATE, DELETE, and SELECT INTO.</li>
+    <li><strong>Explicit Cursors</strong> - Created explicitly by the programmer to process query result sets row-by-row.</li>
+  </ul>
+
+  <h2>Implicit Cursor</h2>
+
+  <p>PL/SQL automatically manages the cursor for simple SELECT INTO, INSERT, UPDATE, DELETE statements.</p>
+
+  <h3>Example</h3>
+  <div class="example">
+DECLARE
+  total_students NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO total_students FROM students;
+  DBMS_OUTPUT.PUT_LINE('Total students: ' || total_students);
+END;
+  </div>
+
+  <h2>Explicit Cursor</h2>
+
+  <h3>Steps:</h3>
+  <ul>
+    <li>Declare the cursor.</li>
+    <li>Open the cursor.</li>
+    <li>Fetch data from the cursor.</li>
+    <li>Close the cursor.</li>
+  </ul>
+
+  <h3>Syntax</h3>
+  <div class="syntax">
+DECLARE
+  CURSOR cursor_name IS select_statement;
+BEGIN
+  OPEN cursor_name;
+  FETCH cursor_name INTO variable1, variable2, ...;
+  CLOSE cursor_name;
+END;
+  </div>
+
+  <h3>Example</h3>
+  <div class="example">
+DECLARE
+  CURSOR student_cursor IS
+    SELECT id, name FROM students;
+  v_id students.id%TYPE;
+  v_name students.name%TYPE;
+BEGIN
+  OPEN student_cursor;
+  LOOP
+    FETCH student_cursor INTO v_id, v_name;
+    EXIT WHEN student_cursor%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE('ID: ' || v_id || ', Name: ' || v_name);
+  END LOOP;
+  CLOSE student_cursor;
+END;
+  </div>
+
+  <h2>Cursor Attributes</h2>
+  <ul>
+    <li><code>%FOUND</code> – Returns TRUE if the last fetch returned a row.</li>
+    <li><code>%NOTFOUND</code> – Returns TRUE if the last fetch did not return a row.</li>
+    <li><code>%ROWCOUNT</code> – Returns the number of rows fetched so far.</li>
+    <li><code>%ISOPEN</code> – Returns TRUE if the cursor is open.</li>
+  </ul>
+
+  <h2>Cursor FOR Loop</h2>
+  <p>Simplifies processing of cursors without explicitly opening, fetching, or closing them.</p>
+
+  <h3>Syntax</h3>
+  <div class="syntax">
+FOR record_variable IN cursor_name LOOP
+   -- statements using record_variable.column_name
+END LOOP;
+  </div>
+
+  <h3>Example</h3>
+  <div class="example">
+DECLARE
+  CURSOR student_cursor IS
+    SELECT id, name FROM students;
+BEGIN
+  FOR student_rec IN student_cursor LOOP
+    DBMS_OUTPUT.PUT_LINE('ID: ' || student_rec.id || ', Name: ' || student_rec.name);
+  END LOOP;
+END;
+  </div>
+
+  <h2>Parameterised Cursor</h2>
+  <p>Cursors can accept parameters to filter data at runtime.</p>
+
+  <h3>Syntax</h3>
+  <div class="syntax">
+CURSOR cursor_name (param datatype) IS
+  SELECT ... WHERE column = param;
+  </div>
+
+  <h3>Example</h3>
+  <div class="example">
+DECLARE
+  CURSOR student_cursor (dept_id NUMBER) IS
+    SELECT id, name FROM students WHERE department_id = dept_id;
+BEGIN
+  FOR student_rec IN student_cursor(2) LOOP
+    DBMS_OUTPUT.PUT_LINE('ID: ' || student_rec.id || ', Name: ' || student_rec.name);
+  END LOOP;
+END;
+  </div>
+
+</body>
+</html>

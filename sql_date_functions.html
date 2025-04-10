@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Date and Time Functions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f0f4f8;
+      padding: 40px;
+      color: #2a2a2a;
+    }
+    h1, h2 {
+      color: #1a1a1a;
+    }
+    .section {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .code-box {
+      background-color: #e2e6ee;
+      border-left: 4px solid #0071e3;
+      padding: 12px;
+      font-family: 'Courier New', Courier, monospace;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      border-radius: 6px;
+      margin: 10px 0;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    code {
+      background-color: #e8f0fe;
+      color: #0071e3;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f8fc;
+      color: #1a1a1a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <h1>Date and Time Functions</h1>
+    <p>MySQL provides a wide variety of date and time functions to work with temporal data types. These functions help you retrieve, format, calculate, and manipulate date and time values efficiently.</p>
+  </div>
+
+  <div class="section">
+    <h2>Common Date and Time Functions</h2>
+    <table>
+      <tr>
+        <th>Function</th>
+        <th>Description</th>
+        <th>Example</th>
+      </tr>
+      <tr>
+        <td><code>CURDATE()</code></td>
+        <td>Returns the current date.</td>
+        <td><div class="code-box">SELECT CURDATE();</div></td>
+      </tr>
+      <tr>
+        <td><code>CURTIME()</code></td>
+        <td>Returns the current time.</td>
+        <td><div class="code-box">SELECT CURTIME();</div></td>
+      </tr>
+      <tr>
+        <td><code>NOW()</code></td>
+        <td>Returns the current date and time.</td>
+        <td><div class="code-box">SELECT NOW();</div></td>
+      </tr>
+      <tr>
+        <td><code>DATE(expr)</code></td>
+        <td>Extracts the date part of a datetime expression.</td>
+        <td><div class="code-box">SELECT DATE('2025-04-08 10:30:00');</div></td>
+      </tr>
+      <tr>
+        <td><code>TIME(expr)</code></td>
+        <td>Extracts the time part of a datetime expression.</td>
+        <td><div class="code-box">SELECT TIME('2025-04-08 10:30:00');</div></td>
+      </tr>
+      <tr>
+        <td><code>YEAR(date)</code></td>
+        <td>Returns the year of a date.</td>
+        <td><div class="code-box">SELECT YEAR('2025-04-08');</div></td>
+      </tr>
+      <tr>
+        <td><code>MONTH(date)</code></td>
+        <td>Returns the month of a date.</td>
+        <td><div class="code-box">SELECT MONTH('2025-04-08');</div></td>
+      </tr>
+      <tr>
+        <td><code>DAY(date)</code></td>
+        <td>Returns the day of the month.</td>
+        <td><div class="code-box">SELECT DAY('2025-04-08');</div></td>
+      </tr>
+      <tr>
+        <td><code>HOUR(time)</code></td>
+        <td>Returns the hour of a time.</td>
+        <td><div class="code-box">SELECT HOUR('10:30:45');</div></td>
+      </tr>
+      <tr>
+        <td><code>MINUTE(time)</code></td>
+        <td>Returns the minute of a time.</td>
+        <td><div class="code-box">SELECT MINUTE('10:30:45');</div></td>
+      </tr>
+      <tr>
+        <td><code>SECOND(time)</code></td>
+        <td>Returns the seconds of a time.</td>
+        <td><div class="code-box">SELECT SECOND('10:30:45');</div></td>
+      </tr>
+      <tr>
+        <td><code>DATEDIFF(expr1, expr2)</code></td>
+        <td>Returns the number of days between two dates.</td>
+        <td><div class="code-box">SELECT DATEDIFF('2025-04-08', '2025-04-01');</div></td>
+      </tr>
+      <tr>
+        <td><code>DATE_ADD(date, INTERVAL expr unit)</code></td>
+        <td>Adds a time interval to a date.</td>
+        <td><div class="code-box">SELECT DATE_ADD('2025-04-08', INTERVAL 10 DAY);</div></td>
+      </tr>
+      <tr>
+        <td><code>DATE_SUB(date, INTERVAL expr unit)</code></td>
+        <td>Subtracts a time interval from a date.</td>
+        <td><div class="code-box">SELECT DATE_SUB('2025-04-08', INTERVAL 5 DAY);</div></td>
+      </tr>
+      <tr>
+        <td><code>STR_TO_DATE(str, format)</code></td>
+        <td>Converts a string to a date/time value based on a given format.</td>
+        <td><div class="code-box">SELECT STR_TO_DATE('08-04-2025', '%d-%m-%Y');</div></td>
+      </tr>
+      <tr>
+        <td><code>DATE_FORMAT(date, format)</code></td>
+        <td>Formats a date according to a given format.</td>
+        <td><div class="code-box">SELECT DATE_FORMAT('2025-04-08', '%W %M %Y');</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Conclusion</h2>
+    <p>These functions are vital for handling, formatting, and calculating with temporal data. MySQL 8.4 offers powerful tools to make date and time manipulation simple and effective for developers and analysts.</p>
+  </div>
+
+</body>
+</html>

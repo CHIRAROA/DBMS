@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SQL COMMIT and ROLLBACK</title>
+  <style>
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #ffffff;
+      padding: 20px;
+      color: #2a2a2a;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .code-box {
+      background-color: #e2e6ee;
+      border-left: 4px solid #0071e3;
+      padding: 15px;
+      font-family: Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    code {
+      background-color: #eef3fa;
+      color: #0071e3;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 90%;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <h1>SQL COMMIT and ROLLBACK</h1>
+    <p>In SQL, the <strong><code>COMMIT</code></strong> and <strong><code>ROLLBACK</code></strong> statements help manage transactions. A transaction ensures data integrity by grouping one or more SQL statements into a single logical unit of work.</p>
+  </div>
+
+  <div class="section">
+    <h2>What is a Transaction?</h2>
+    <p>A transaction is a group of operations executed together. If all succeed, the transaction is committed; if there’s an error or manual interruption, the transaction can be rolled back.</p>
+    <ul>
+      <li><code>COMMIT</code>: Permanently saves changes made by the transaction.</li>
+      <li><code>ROLLBACK</code>: Reverts all changes made during the transaction.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>COMMIT Syntax</h2>
+    <div class="code-box">
+COMMIT;
+    </div>
+    <p>Use the <code>COMMIT</code> command to save all changes made in the current transaction.</p>
+  </div>
+
+  <div class="section">
+    <h2>ROLLBACK Syntax</h2>
+    <div class="code-box">
+ROLLBACK;
+    </div>
+    <p>Use the <code>ROLLBACK</code> command to undo the current transaction before it's committed.</p>
+  </div>
+
+  <div class="section">
+    <h2>Example Using COMMIT</h2>
+    <p>Here’s how you insert a record and commit the transaction:</p>
+    <div class="code-box">
+START TRANSACTION;
+
+INSERT INTO Employees (ID, Name, Department)
+VALUES (5, 'Alice', 'IT');
+
+COMMIT;
+    </div>
+    <p>This ensures the new employee record is permanently saved.</p>
+  </div>
+
+  <div class="section">
+    <h2>Example Using ROLLBACK</h2>
+    <p>If you detect a mistake during a transaction, you can cancel the changes:</p>
+    <div class="code-box">
+START TRANSACTION;
+
+UPDATE Employees
+SET Department = 'Finance'
+WHERE ID = 5;
+
+ROLLBACK;
+    </div>
+    <p>This rolls back the department update, discarding the change.</p>
+  </div>
+
+  <div class="section">
+    <h2>Important Notes</h2>
+    <ul>
+      <li>Some databases (e.g., MySQL) auto-commit each statement. Use <code>START TRANSACTION</code> or disable autocommit to control this behavior.</li>
+      <li>Transactions are ideal when multiple operations must either all succeed or all fail.</li>
+      <li><code>COMMIT</code> makes changes permanent; <code>ROLLBACK</code> cancels them.</li>
+    </ul>
+  </div>
+
+</body>
+</html>

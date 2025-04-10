@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PL/SQL Assignment Statement</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1, h2, h3 {
+      color: #0071e3;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-top: 30px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    p, li {
+      font-size: 16px;
+      color: #333;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .syntax, .example {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-left: 5px solid #0071e3;
+      padding: 12px 16px;
+      margin: 20px 0;
+      font-family: Consolas, monospace;
+      white-space: pre-wrap;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.05);
+      border-radius: 8px;
+    }
+
+    code {
+      background-color: #e8f0fe;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>PL/SQL Assignment Statement</h1>
+
+  <p>An <strong>assignment statement</strong> in PL/SQL sets the value of a variable, a field, or an element of a collection. The value of the expression on the right-hand side is assigned to the target on the left-hand side using the assignment operator <code>:=</code>.</p>
+
+  <h2>Syntax</h2>
+
+  <div class="syntax">
+target := expression;
+  </div>
+
+  <p><strong>target</strong> can be a variable, a field in a record, or an element in a collection.</p>
+  <p><strong>expression</strong> can be any legal PL/SQL expression that returns a value compatible with the type of the target.</p>
+
+  <h2>Example</h2>
+
+  <div class="example">
+DECLARE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bonus NUMBER(5,2);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;salary NUMBER(7,2) := 4500.00;<br>
+BEGIN<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bonus := salary * 0.10;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Bonus: ' || bonus);<br>
+END;
+  </div>
+
+  <h2>Explanation</h2>
+
+  <ul>
+    <li>A variable <code>salary</code> is initialized to <code>4500.00</code>.</li>
+    <li><code>bonus</code> is calculated by multiplying <code>salary</code> by <code>0.10</code> using the assignment statement <code>bonus := salary * 0.10;</code>.</li>
+    <li>The value of <code>bonus</code> is then displayed using <code>DBMS_OUTPUT.PUT_LINE</code>.</li>
+  </ul>
+
+  <h2>Notes</h2>
+
+  <ul>
+    <li>The target of the assignment must be writable. Constants and expressions cannot be used as the target.</li>
+    <li>The data type of the expression must be compatible with the data type of the target variable.</li>
+    <li>Assignment can occur between same-type variables, or implicit conversion may be applied if types are compatible.</li>
+  </ul>
+
+</body>
+</html>

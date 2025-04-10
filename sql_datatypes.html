@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SQL Data Types</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7fa;
+      color: #2c3e50;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #0071e3;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #ffffff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+      background-color: #f0f4f8;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+
+    tr:hover td {
+      background-color: #f9fbfc;
+    }
+
+    code {
+      background-color: #ecf0f1;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 0.95em;
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      tr {
+        margin-bottom: 15px;
+      }
+
+      th, td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+      }
+
+      th::before, td::before {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        white-space: nowrap;
+        font-weight: 600;
+        color: #0071e3;
+      }
+
+      th:nth-of-type(1)::before { content: "Data type"; }
+      th:nth-of-type(2)::before { content: "Description"; }
+      td:nth-of-type(1)::before { content: "Data type"; }
+      td:nth-of-type(2)::before { content: "Description"; }
+    }
+  </style>
+</head>
+<body>
+  <h1>SQL Data Types</h1>
+  <h2>SQL Data Types for MySQL, SQL Server, and MS Access</h2>
+
+  <table>
+    <tr><th>Data type</th><th>Description</th></tr>
+    <tr><td>CHAR(size)</td><td>Fixed length string. Size from 0 to 255. Default is 1.</td></tr>
+    <tr><td>VARCHAR(size)</td><td>Variable length string. Max 65535 characters.</td></tr>
+    <tr><td>TEXT(size)</td><td>Holds string up to 65,535 characters.</td></tr>
+    <tr><td>TINYINT(size)</td><td>-128 to 127 or 0 to 255.</td></tr>
+    <tr><td>SMALLINT(size)</td><td>-32,768 to 32,767 or 0 to 65,535.</td></tr>
+    <tr><td>MEDIUMINT(size)</td><td>-8,388,608 to 8,388,607 or 0 to 16,777,215.</td></tr>
+    <tr><td>INT(size)</td><td>-2,147,483,648 to 2,147,483,647 or 0 to 4,294,967,295.</td></tr>
+    <tr><td>BIGINT(size)</td><td>Huge range: ±9 quintillion+.</td></tr>
+    <tr><td>DECIMAL(p,s)</td><td>Exact value. <code>p</code> = precision, <code>s</code> = scale (decimal places).</td></tr>
+    <tr><td>FLOAT(p)</td><td>Approximate float number.</td></tr>
+    <tr><td>DATE</td><td>Format: YYYY-MM-DD.</td></tr>
+    <tr><td>DATETIME(fsp)</td><td>Format: YYYY-MM-DD HH:MI:SS.</td></tr>
+    <tr><td>TIMESTAMP(fsp)</td><td>Format: YYYY-MM-DD HH:MI:SS.</td></tr>
+    <tr><td>TIME(fsp)</td><td>Format: HH:MI:SS.</td></tr>
+    <tr><td>YEAR</td><td>Four-digit year format.</td></tr>
+  </table>
+</body>
+</html>

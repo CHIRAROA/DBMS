@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SQL Table Operators</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 20px;
+      color: #2a2a2a;
+    }
+    h1, h2 {
+      color: #1a1a1a;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    h2 {
+      font-size: 22px;
+      margin-top: 30px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 20px;
+      font-size: 16px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .section {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.03);
+    }
+    .code-box {
+      border: 1px solid #e2e6ee;
+      border-left: 5px solid #0071e3;
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 15px 0;
+      font-family: 'Courier New', Courier, monospace;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <h1>SQL Table Operators</h1>
+    <p>SQL table operators are used to combine the results of two or more queries. The main table operators are:</p>
+    <ul>
+      <li><strong>UNION</strong> – combines result sets and removes duplicates.</li>
+      <li><strong>UNION ALL</strong> – combines result sets and keeps duplicates.</li>
+      <li><strong>INTERSECT</strong> – returns only rows present in both result sets.</li>
+      <li><strong>EXCEPT / MINUS</strong> – returns rows from the first result set that are not in the second.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>UNION Syntax</h2>
+    <div class="code-box">
+SELECT column_list
+FROM table1
+UNION
+SELECT column_list
+FROM table2;
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>UNION ALL Syntax</h2>
+    <div class="code-box">
+SELECT column_list
+FROM table1
+UNION ALL
+SELECT column_list
+FROM table2;
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>INTERSECT Syntax</h2>
+    <div class="code-box">
+SELECT column_list
+FROM table1
+INTERSECT
+SELECT column_list
+FROM table2;
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>EXCEPT / MINUS Syntax</h2>
+    <div class="code-box">
+SELECT column_list
+FROM table1
+EXCEPT
+SELECT column_list
+FROM table2;
+    </div>
+    <p><strong>Note:</strong> In Exasol, <code>MINUS</code> is an alias for <code>EXCEPT</code>.</p>
+  </div>
+
+  <div class="section">
+    <h2>Example</h2>
+    <p>Consider two tables: <code>Employees_US</code> and <code>Employees_EU</code>.</p>
+
+    <div class="code-box">
+-- Get all unique employees across both regions
+SELECT name FROM Employees_US
+UNION
+SELECT name FROM Employees_EU;
+    </div>
+
+    <div class="code-box">
+-- Get employees common to both regions
+SELECT name FROM Employees_US
+INTERSECT
+SELECT name FROM Employees_EU;
+    </div>
+
+    <div class="code-box">
+-- Get employees only in US but not in EU
+SELECT name FROM Employees_US
+EXCEPT
+SELECT name FROM Employees_EU;
+    </div>
+  </div>
+
+</body>
+</html>

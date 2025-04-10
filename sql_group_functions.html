@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MySQL GROUP BY Statement</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f0f4f8;
+      padding: 30px;
+      color: #2a2a2a;
+    }
+    h1, h2, h3 {
+      color: #1a1a1a;
+    }
+    .section {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.02);
+    }
+    .code-box {
+      background-color: #e2e6ee;
+      border-left: 4px solid #0071e3;
+      padding: 15px;
+      font-family: 'Courier New', Courier, monospace;
+      white-space: pre;
+      overflow-x: auto;
+      border-radius: 8px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    code {
+      background-color: #e0eefe;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <h1>MySQL GROUP BY Statement</h1>
+    <p>The MySQL <code>GROUP BY</code> statement groups rows that have the same values into summary rows, such as finding the number of customers in each country. It is often used with aggregate functions like <code>COUNT()</code>, <code>MAX()</code>, <code>MIN()</code>, <code>SUM()</code>, and <code>AVG()</code> to group the result-set by one or more columns.</p>
+  </div>
+
+  <div class="section">
+    <h2>Syntax</h2>
+    <div class="code-box">
+SELECT column_name(s)
+FROM table_name
+GROUP BY column_name(s);
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Example: Counting Customers by Country</h2>
+    <p>The following SQL statement lists the number of customers in each country:</p>
+    <div class="code-box">
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country;
+    </div>
+    <p><strong>Explanation:</strong> This query selects the count of customers and the country from the <code>Customers</code> table, grouping the results by the <code>Country</code> column.</p>
+  </div>
+
+  <div class="section">
+    <h2>Example: Counting Customers by Country with Sorting</h2>
+    <p>The following SQL statement lists the number of customers in each country, sorted from highest to lowest:</p>
+    <div class="code-box">
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+ORDER BY COUNT(CustomerID) DESC;
+    </div>
+    <p><strong>Explanation:</strong> This query extends the previous example by adding an <code>ORDER BY</code> clause to sort the results based on the count of customers in descending order.</p>
+  </div>
+
+  <div class="section">
+    <h2>Example: GROUP BY with JOIN</h2>
+    <p>The following SQL statement lists the number of orders sent by each shipper:</p>
+    <div class="code-box">
+SELECT Shippers.ShipperName, COUNT(Orders.OrderID) AS NumberOfOrders
+FROM Orders
+LEFT JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID
+GROUP BY ShipperName;
+    </div>
+    <p><strong>Explanation:</strong> This query joins the <code>Orders</code> and <code>Shippers</code> tables on the <code>ShipperID</code> column and groups the results by <code>ShipperName</code>, counting the number of orders for each shipper.</p>
+  </div>
+
+  <div class="section">
+    <h2>Note</h2>
+    <p>When using the <code>GROUP BY</code> statement, ensure that all selected columns are either used for grouping or are aggregated. This ensures the query adheres to SQL standards and avoids errors.</p>
+  </div>
+
+</body>
+</html>

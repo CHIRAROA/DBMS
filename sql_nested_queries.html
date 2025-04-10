@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SQL Nested Queries</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 20px;
+      color: #2a2a2a;
+    }
+    h1, h2 {
+      color: #1a1a1a;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    h2 {
+      font-size: 22px;
+      margin-top: 30px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 20px;
+      font-size: 16px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .section {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.03);
+    }
+    .code-box {
+      border: 1px solid #e2e6ee;
+      border-left: 5px solid #0071e3;
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 15px 0;
+      font-family: 'Courier New', Courier, monospace;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #e8f1fb;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <h1>SQL Nested Queries</h1>
+    <p>In SQL, a nested query (also known as a subquery) is a query within another SQL query and embedded within the WHERE clause. A subquery can be used with operators like <code>=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>IN</code>, <code>ANY</code>, <code>ALL</code>, or <code>EXISTS</code>.</p>
+  </div>
+
+  <div class="section">
+    <h2>Syntax</h2>
+    <div class="code-box">
+SELECT column_name
+FROM table_name
+WHERE column_name OPERATOR
+  (SELECT column_name FROM table_name WHERE condition);
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Nested Query Example</h2>
+    <p>Let us consider the <code>CUSTOMERS</code> table:</p>
+    <table>
+      <tr><th>ID</th><th>NAME</th><th>AGE</th><th>ADDRESS</th><th>SALARY</th></tr>
+      <tr><td>1</td><td>Ramesh</td><td>32</td><td>Ahmedabad</td><td>2000.00</td></tr>
+      <tr><td>2</td><td>Khilan</td><td>25</td><td>Delhi</td><td>1500.00</td></tr>
+      <tr><td>3</td><td>Kaushik</td><td>23</td><td>Kota</td><td>2000.00</td></tr>
+      <tr><td>4</td><td>Chaitali</td><td>25</td><td>Mumbai</td><td>6500.00</td></tr>
+      <tr><td>5</td><td>Hardik</td><td>27</td><td>Bhopal</td><td>8500.00</td></tr>
+      <tr><td>6</td><td>Komal</td><td>22</td><td>Hyderabad</td><td>4500.00</td></tr>
+      <tr><td>7</td><td>Muffy</td><td>24</td><td>Indore</td><td>10000.00</td></tr>
+    </table>
+    <p>The following query will return all customers whose salary is equal to the minimum salary from the table:</p>
+    <div class="code-box">
+SELECT * FROM CUSTOMERS
+WHERE SALARY = (SELECT MIN(SALARY) FROM CUSTOMERS);
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Output</h2>
+    <table>
+      <tr><th>ID</th><th>NAME</th><th>AGE</th><th>ADDRESS</th><th>SALARY</th></tr>
+      <tr><td>2</td><td>Khilan</td><td>25</td><td>Delhi</td><td>1500.00</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Types of Nested Queries</h2>
+    <ul>
+      <li><strong>Single Row Subquery</strong> - returns only one row.</li>
+      <li><strong>Multiple Row Subquery</strong> - returns more than one row.</li>
+      <li><strong>Multiple Column Subquery</strong> - returns more than one column.</li>
+      <li><strong>Correlated Subquery</strong> - subquery depends on outer query.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Single Row Subquery Example</h2>
+    <p>Get customers with the same salary as the customer named 'Kaushik':</p>
+    <div class="code-box">
+SELECT * FROM CUSTOMERS
+WHERE SALARY = (SELECT SALARY FROM CUSTOMERS WHERE NAME = 'Kaushik');
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Multiple Row Subquery Example</h2>
+    <p>Get customers from cities where any customer has a salary more than 5000:</p>
+    <div class="code-box">
+SELECT * FROM CUSTOMERS
+WHERE ADDRESS IN (SELECT ADDRESS FROM CUSTOMERS WHERE SALARY &gt; 5000);
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Multiple Column Subquery Example</h2>
+    <p>Get customers whose (AGE, SALARY) pair matches those of any other customer:</p>
+    <div class="code-box">
+SELECT * FROM CUSTOMERS
+WHERE (AGE, SALARY) IN (SELECT AGE, SALARY FROM CUSTOMERS WHERE SALARY &gt; 5000);
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Correlated Subquery Example</h2>
+    <p>Get all customers whose salary is more than the average salary of customers from the same city:</p>
+    <div class="code-box">
+SELECT * FROM CUSTOMERS C1
+WHERE SALARY &gt; (SELECT AVG(SALARY) FROM CUSTOMERS C2 WHERE C1.ADDRESS = C2.ADDRESS);
+    </div>
+  </div>
+
+</body>
+</html>

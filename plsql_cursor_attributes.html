@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PL/SQL Cursor Attributes</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+
+    h1, h2 {
+      color: #0071e3;
+    }
+
+    h1 {
+      font-size: 28px;
+      border-bottom: 2px solid #0071e3;
+      padding-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-top: 30px;
+      border-left: 4px solid #0071e3;
+      padding-left: 10px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    p, li {
+      font-size: 16px;
+      color: #333;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .syntax, .example {
+      border: 1px solid #ccc;
+      background-color: #ffffff;
+      padding: 12px 16px;
+      margin: 20px 0;
+      font-family: Consolas, monospace;
+      white-space: pre-wrap;
+      border-left: 4px solid #0071e3;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    code {
+      background-color: #e8f1fa;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background-color: #fff;
+      margin-top: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      border: 1px solid #ddd;
+      text-align: left;
+      font-size: 15px;
+    }
+
+    th {
+      background-color: #0071e3;
+      color: #fff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9fbfd;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>PL/SQL Cursor Attributes</h1>
+
+  <p>PL/SQL provides a set of attributes that allow developers to obtain information about the execution of SQL statements and cursor operations. These attributes can be used with both implicit and explicit cursors.</p>
+
+  <h2>Implicit Cursor Attributes</h2>
+
+  <p>Implicit cursors are automatically created by PL/SQL for SQL statements such as INSERT, UPDATE, DELETE, and SELECT INTO. The implicit cursor is always referred to as <code>SQL</code>.</p>
+
+  <ul>
+    <li><strong>SQL%FOUND</strong> - Returns TRUE if the last DML statement affected one or more rows.</li>
+    <li><strong>SQL%NOTFOUND</strong> - Returns TRUE if the last DML statement did not affect any row.</li>
+    <li><strong>SQL%ROWCOUNT</strong> - Returns the number of rows affected by the last DML statement.</li>
+    <li><strong>SQL%ISOPEN</strong> - Always returns FALSE for implicit cursors (they close automatically).</li>
+  </ul>
+
+  <h3>Example</h3>
+  <div class="example">
+BEGIN
+  UPDATE employees SET salary = salary * 1.1 WHERE department_id = 10;
+
+  IF SQL%FOUND THEN
+    DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT || ' rows updated.');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('No rows updated.');
+  END IF;
+END;
+  </div>
+
+  <h2>Explicit Cursor Attributes</h2>
+
+  <p>Explicit cursors are user-defined and allow processing of query result sets row-by-row. The following attributes are available for explicit cursors:</p>
+
+  <ul>
+    <li><strong>cursor_name%ISOPEN</strong> - Returns TRUE if the cursor is open.</li>
+    <li><strong>cursor_name%FOUND</strong> - Returns TRUE if the last fetch returned a row.</li>
+    <li><strong>cursor_name%NOTFOUND</strong> - Returns TRUE if the last fetch did not return a row.</li>
+    <li><strong>cursor_name%ROWCOUNT</strong> - Returns the number of rows fetched so far.</li>
+  </ul>
+
+  <h3>Example</h3>
+  <div class="example">
+DECLARE
+  CURSOR emp_cursor IS
+    SELECT employee_id, first_name FROM employees WHERE department_id = 10;
+
+  v_id employees.employee_id%TYPE;
+  v_name employees.first_name%TYPE;
+BEGIN
+  OPEN emp_cursor;
+  
+  LOOP
+    FETCH emp_cursor INTO v_id, v_name;
+    EXIT WHEN emp_cursor%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE('ID: ' || v_id || ', Name: ' || v_name);
+  END LOOP;
+  
+  DBMS_OUTPUT.PUT_LINE('Total rows fetched: ' || emp_cursor%ROWCOUNT);
+  CLOSE emp_cursor;
+END;
+  </div>
+
+  <h2>Summary Table</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Attribute</th>
+        <th>Description</th>
+        <th>Usage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>%ISOPEN</td>
+        <td>Returns TRUE if the cursor is open</td>
+        <td>Explicit Only</td>
+      </tr>
+      <tr>
+        <td>%FOUND</td>
+        <td>TRUE if the last fetch/DML affected a row</td>
+        <td>Both Implicit and Explicit</td>
+      </tr>
+      <tr>
+        <td>%NOTFOUND</td>
+        <td>TRUE if the last fetch/DML did not affect any row</td>
+        <td>Both Implicit and Explicit</td>
+      </tr>
+      <tr>
+        <td>%ROWCOUNT</td>
+        <td>Number of rows affected or fetched</td>
+        <td>Both Implicit and Explicit</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

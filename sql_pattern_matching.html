@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SQL LIKE Operator</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #ffffff;
+      padding: 20px;
+      color: #2a2a2a;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .code-box {
+      background-color: #e2e6ee;
+      border-left: 4px solid #0071e3;
+      padding: 15px;
+      font-family: Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    code {
+      background-color: #eef3fa;
+      color: #0071e3;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 90%;
+    }
+
+    ul {
+      margin: 10px 0 20px;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f0f4f8;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <h1>SQL LIKE Operator</h1>
+    <p>The <strong>LIKE</strong> operator is used in a <code>WHERE</code> clause to search for a specified pattern in a column.</p>
+    <p>There are two wildcards often used with the <code>LIKE</code> operator:</p>
+    <ul>
+      <li>The percent sign (<code>%</code>) represents zero, one, or multiple characters.</li>
+      <li>The underscore (<code>_</code>) represents a single character.</li>
+    </ul>
+    <p><code>LIKE</code> is case-insensitive in some databases.</p>
+  </div>
+
+  <div class="section">
+    <h2>Syntax</h2>
+    <div class="code-box">
+SELECT column1, column2, ...
+FROM table_name
+WHERE columnN LIKE pattern;
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Examples</h2>
+
+    <h3>Using the % Wildcard</h3>
+    <p>Find values that start with "a":</p>
+    <div class="code-box">
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a%';
+    </div>
+
+    <p>Find values that end with "a":</p>
+    <div class="code-box">
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%a';
+    </div>
+
+    <p>Find values that contain "or" anywhere:</p>
+    <div class="code-box">
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%or%';
+    </div>
+
+    <h3>Using the _ Wildcard</h3>
+    <p>Find values with "r" in the second position:</p>
+    <div class="code-box">
+SELECT * FROM Customers
+WHERE CustomerName LIKE '_r%';
+    </div>
+
+    <p>Find values that start with "a" and are at least 3 characters long:</p>
+    <div class="code-box">
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a_%_%';
+    </div>
+
+    <p>Find values that start with "a" and end with "o":</p>
+    <div class="code-box">
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a%o';
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Using NOT with LIKE</h2>
+    <p>Use the <code>NOT</code> operator to exclude a pattern:</p>
+    <p>Find values that do <em>not</em> start with "a":</p>
+    <div class="code-box">
+SELECT * FROM Customers
+WHERE CustomerName NOT LIKE 'a%';
+    </div>
+  </div>
+
+</body>
+</html>

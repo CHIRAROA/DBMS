@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SQL CREATE TABLE Using Another Table</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #ffffff;
+      padding: 20px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    h1, h2 {
+      color: #2c3e50;
+    }
+
+    .code-block {
+      background-color: #e2e6ee;
+      border-left: 4px solid #0071e3;
+      padding: 15px;
+      font-family: Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+      margin: 20px 0;
+    }
+
+    code {
+      background-color: #eef3fa;
+      color: #0071e3;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 90%;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <h1>Create Table Using Another Table</h1>
+    <p>A copy of an existing table can also be created using <code>CREATE TABLE</code>.</p>
+    <p>The new table gets the same column definitions. All columns or specific columns can be selected.</p>
+    <p>If you create a new table using an existing table, the new table will be filled with the existing values from the old table.</p>
+  </div>
+
+  <div class="section">
+    <h2>Syntax</h2>
+    <div class="code-block">
+CREATE TABLE new_table_name AS
+SELECT column1, column2, ...
+FROM existing_table_name
+WHERE ...;
+    </div>
+  </div>
+
+  <div class="section">
+    <p>The following SQL creates a new table called <code>TestTable</code> (which is a copy of the <code>Customers</code> table):</p>
+  </div>
+
+  <div class="section">
+    <h2>Example</h2>
+    <div class="code-block">
+CREATE TABLE TestTable AS
+SELECT customername, contactname
+FROM customers;
+    </div>
+  </div>
+
+</body>
+</html>

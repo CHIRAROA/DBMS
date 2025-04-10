@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PL/SQL Triggers</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+
+    h1, h2 {
+      color: #0071e3;
+    }
+
+    h1 {
+      font-size: 28px;
+      border-bottom: 2px solid #0071e3;
+      padding-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-top: 30px;
+      border-left: 4px solid #0071e3;
+      padding-left: 10px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    p, li {
+      font-size: 16px;
+      color: #333;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .syntax, .example {
+      border: 1px solid #ccc;
+      background-color: #ffffff;
+      padding: 12px 16px;
+      margin: 20px 0;
+      font-family: Consolas, monospace;
+      white-space: pre-wrap;
+      border-left: 4px solid #0071e3;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    code {
+      background-color: #e8f1fa;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>PL/SQL Triggers</h1>
+
+  <p>PL/SQL triggers execute automatically in response to specific events on a table or view. They can be defined to run BEFORE or AFTER INSERT, UPDATE, or DELETE actions, either at the statement level or the row level.</p>
+
+  <h2>Trigger Syntax</h2>
+  <div class="syntax">
+CREATE [OR REPLACE] TRIGGER trigger_name
+{BEFORE | AFTER}
+{INSERT | UPDATE | DELETE}
+ON table_name
+[FOR EACH ROW] -- Row-level
+BEGIN
+   -- trigger body
+END;
+  </div>
+
+  <h2>Trigger Examples by Type</h2>
+
+  <h3>BEFORE INSERT - Row-Level</h3>
+  <div class="example">
+CREATE OR REPLACE TRIGGER before_insert_row
+BEFORE INSERT ON employees
+FOR EACH ROW
+BEGIN
+   :NEW.created_at := SYSDATE;
+END;
+  </div>
+
+  <h3>BEFORE INSERT - Statement-Level</h3>
+  <div class="example">
+CREATE OR REPLACE TRIGGER before_insert_stmt
+BEFORE INSERT ON employees
+BEGIN
+   DBMS_OUTPUT.PUT_LINE('Insert operation is about to begin.');
+END;
+  </div>
+
+  <h3>BEFORE UPDATE - Row-Level</h3>
+  <div class="example">
+CREATE OR REPLACE TRIGGER before_update_row
+BEFORE UPDATE ON employees
+FOR EACH ROW
+BEGIN
+   :NEW.updated_at := SYSDATE;
+END;
+  </div>
+
+  <h3>BEFORE UPDATE - Statement-Level</h3>
+  <div class="example">
+CREATE OR REPLACE TRIGGER before_update_stmt
+BEFORE UPDATE ON employees
+BEGIN
+   DBMS_OUTPUT.PUT_LINE('Update statement is executing.');
+END;
+  </div>
+
+  <h3>BEFORE DELETE - Row-Level</h3>
+  <div class="example">
+CREATE OR REPLACE TRIGGER before_delete_row
+BEFORE DELETE ON employees
+FOR EACH ROW
+BEGIN
+   DBMS_OUTPUT.PUT_LINE('Deleting employee: ' || :OLD.employee_id);
+END;
+  </div>
+
+  <h3>BEFORE DELETE - Statement-Level</h3>
+  <div class="example">
+CREATE OR REPLACE TRIGGER before_delete_stmt
+BEFORE DELETE ON employees
+BEGIN
+   DBMS_OUTPUT.PUT_LINE('Delete statement is executing.');
+END;
+  </div>
+
+  <h3>AFTER INSERT - Row-Level</h3>
+  <div class="example">
+CREATE OR REPLACE TRIGGER after_insert_row
+AFTER INSERT ON employees
+FOR EACH ROW
+BEGIN
+   INSERT INTO audit_log (action, user_id, action_date)
+   VALUES ('Insert', :NEW.employee_id, SYSDATE);
+END;
+  </div>
+
+  <h3>AFTER INSERT - Statement-Level</h3>
+  <div class="example">
+CREATE OR REPLACE TRIGGER after_insert_stmt
+AFTER INSERT ON employees
+BEGIN
+   DBMS_OUTPUT.PUT_LINE('Insert operation completed.');
+END;
+  </div>
+
+  <h3>AFTER UPDATE - Row-Level</h3>
+  <div class="example">
+CREATE OR REPLACE TRIGGER after_update_row
+AFTER UPDATE ON employees
+FOR EACH ROW
+BEGIN
+   INSERT INTO audit_log (action, user_id, action_date)
+   VALUES ('Update', :NEW.employee_id, SYSDATE);
+END;
+  </div>
+
+  <h3>AFTER UPDATE - Statement-Level</h3>
+  <div class="example">
+CREATE OR REPLACE TRIGGER after_update_stmt
+AFTER UPDATE ON employees
+BEGIN
+   DBMS_OUTPUT.PUT_LINE('Update completed.');
+END;
+  </div>
+
+  <h3>AFTER DELETE - Row-Level</h3>
+  <div class="example">
+CREATE OR REPLACE TRIGGER after_delete_row
+AFTER DELETE ON employees
+FOR EACH ROW
+BEGIN
+   INSERT INTO audit_log (action, user_id, action_date)
+   VALUES ('Delete', :OLD.employee_id, SYSDATE);
+END;
+  </div>
+
+  <h3>AFTER DELETE - Statement-Level</h3>
+  <div class="example">
+CREATE OR REPLACE TRIGGER after_delete_stmt
+AFTER DELETE ON employees
+BEGIN
+   DBMS_OUTPUT.PUT_LINE('Delete completed.');
+END;
+  </div>
+
+  <h2>Dropping Triggers</h2>
+  <div class="syntax">
+DROP TRIGGER trigger_name;
+  </div>
+
+  <h3>Example</h3>
+  <div class="example">
+DROP TRIGGER before_insert_row;
+  </div>
+
+  <h2>Trigger Storage</h2>
+  <p>Triggers are stored in the database and can be viewed using:</p>
+  <div class="example">
+SELECT trigger_name, table_name, triggering_event, status
+FROM user_triggers;
+  </div>
+
+  <h2>Enabling and Disabling Triggers</h2>
+
+  <h3>Disable Trigger</h3>
+  <div class="syntax">
+ALTER TRIGGER trigger_name DISABLE;
+  </div>
+
+  <h3>Enable Trigger</h3>
+  <div class="syntax">
+ALTER TRIGGER trigger_name ENABLE;
+  </div>
+
+</body>
+</html>
